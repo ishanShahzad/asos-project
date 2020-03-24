@@ -1,12 +1,16 @@
 import React from "react";
 
-const PreNav = () => {
+const PreNav = props => {
   return (
     <div className="prenav">
       <ul>
         <li>Marketplace</li>
         <li>Help & FAQs</li>
-        <li>location</li>
+        <li>
+          <div className="flag">
+            {props.name.country}, {props.name.city}
+          </div>
+        </li>
       </ul>
     </div>
   );

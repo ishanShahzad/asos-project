@@ -1,20 +1,50 @@
-.app {
-  color: blueviolet;
-}
-.vlist {
-  height: 150px;
-  border: 1px solid black;
+.prenav {
   width: 100%;
+  height: 40px;
+  border: 2px solid black;
+  background-color: #f8f8f8;
+  display: flex;
+  justify-content: flex-end;
 }
-.vlist-img {
+.prenav ul {
+  display: flex;
+  width: 30%;
+  /* justify-content: space-around; */
+  justify-items: center;
+  align-items: center;
   height: 100%;
-  width: 60%;
-  border: 1px;
-  float: left;
 }
-.vlist-des {
+.prenav ul li {
+  border-left: 0.5px solid #ede8e8;
+  border-right: 0.5px solid #ede8e8;
+  padding-left: 4%;
+  padding-top: 3%;
+  font-size: 12px;
+  box-sizing: border-box;
+  width: 33.3%;
   height: 100%;
-  /* width: 50%; */
+}
+.prenav ul li:hover {
+  color: lightskyblue;
+}
+/* .flag {
+  border: 1px solid black;
+  width: 25%;
+  height: 100%;
+  border-radius: 50%;
+  position: relative;
+  left: 35%;
+  top: -20%;
+} */
+.prenav ul li:hover .flag {
+  border-color: lightskyblue;
+}
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  outline: none;
 }
 
 /*# sourceMappingURL=styles.css.map*/

@@ -34,7 +34,7 @@
     "style-loader": "^0.23.1"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "mongoose": "^5.5.1",
