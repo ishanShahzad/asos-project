@@ -6,7 +6,9 @@ class App extends Component {
     country: "",
     city: "",
     value: "",
-    task: []
+    task: [],
+    edit: false,
+    currentIndex: null
   };
   // componentDidMount() {
   //   console.log("hello");
@@ -18,20 +20,31 @@ class App extends Component {
   //   );
   // }
   handleChange = e => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     this.setState({
       value: e.target.value
     });
   };
   handleSubmit = e => {
     e.preventDefault();
-    this.setState({
-      task: [...this.state.task, this.state.value],
-      value: ""
-    });
+    if (!this.state.edit) {
+      this.setState({
+        task: [...this.state.task, this.state.value],
+        value: ""
+      });
+    } else {
+      let taskCp = this.state.task;
+      taskCp.splice(this.state.currentIndex, 1, this.state.value);
+      this.setState({
+        task: taskCp,
+        value: "",
+        edit: false
+      });
+    }
   };
+  handleSubmitAgain = () => {};
   handleDelete = i => {
-    console.log("hello", i);
+    // console.log("hello", i);
     let taskCp = this.state.task;
     taskCp.splice(i, 1);
     this.setState({
@@ -39,16 +52,46 @@ class App extends Component {
     });
   };
   handleUp = i => {
-    console.log(i);
+    // console.log(i);
+    if (i == 0) {
+      alert("its on top baby");
+    } else {
+      let taskCp = this.state.task;
+      let element = taskCp.splice(i, 1);
+      // console.log(element);
+      // console.log(taskCp);
+      taskCp.splice(i - 1, 0, ...element);
+      // console.log(taskCp);
+
+      this.setState({
+        task: taskCp
+      });
+    }
+  };
+  handleDown = i => {
     let taskCp = this.state.task;
-    let element = taskCp.splice(i, 1);
-    console.log(element);
+    // console.log(taskCp.length, i);
+    if (i == taskCp.length - 1) {
+      alert("its on bottom baby");
+    } else {
+      let element = taskCp.splice(i, 1);
+      // console.log(element);
+      // console.log(taskCp);
+      taskCp.splice(i + 1, 0, ...element);
+      // console.log(taskCp);
 
-    taskCp.splice(i, 0, ...element);
-    console.log(taskCp);
-
+      this.setState({
+        task: taskCp
+      });
+    }
+  };
+  handleEdit = i => {
+    let taskCp = this.state.task;
+    console.log(taskCp[i]);
     this.setState({
-      task: taskCp
+      value: this.state.task[i],
+      edit: true,
+      currentIndex: i
     });
   };
   render() {
@@ -65,14 +108,24 @@ class App extends Component {
             >
               DEL
             </button>
-            <button className="btn btn-success">EDIT</button>
+            <button
+              className="btn btn-success"
+              onClick={() => this.handleEdit(index)}
+            >
+              EDIT
+            </button>
             <button
               className="btn btn-info"
               onClick={() => this.handleUp(index)}
             >
               UP
             </button>
-            <button className="btn btn-primary">DOWN</button>
+            <button
+              className="btn btn-primary"
+              onClick={() => this.handleDown(index)}
+            >
+              DOWN
+            </button>
           </td>
         </tr>
       );
@@ -84,8 +137,13 @@ class App extends Component {
             type="text"
             value={this.state.value}
             onChange={this.handleChange}
+            style={{ padding: "10px", marginRight: "10px", width: "400px" }}
           />
-          <button>ADD TASK</button>
+          <button
+            className={this.state.edit ? "btn btn-success" : "btn btn-primary"}
+          >
+            {this.state.edit ? "EDIT" : "ADD TASK"}
+          </button>
         </form>
         <table className="table table-striped">
           <thead>
